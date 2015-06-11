@@ -35,6 +35,8 @@ public class Http2OrHttpHandler extends Http2OrHttpChooser {
         super(maxHttpContentLength);
     }
 
+
+//    获取支持的协议
     @Override
     protected SelectedProtocol getProtocol(SSLEngine engine) {
         String[] protocol = engine.getSession().getProtocol().split(":");
@@ -48,11 +50,11 @@ public class Http2OrHttpHandler extends Http2OrHttpChooser {
 
     @Override
     protected ChannelHandler createHttp1RequestHandler() {
-        return new HelloWorldHttp1Handler();
+        return new Http1Handler();
     }
 
     @Override
     protected Http2ConnectionHandler createHttp2RequestHandler() {
-        return new HelloWorldHttp2Handler();
+        return new Http2Handler();
     }
 }

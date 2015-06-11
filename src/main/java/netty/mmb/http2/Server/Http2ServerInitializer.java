@@ -64,13 +64,13 @@ public class Http2ServerInitializer extends ChannelInitializer<SocketChannel> {
         HttpServerCodec sourceCodec = new HttpServerCodec();
 //        HttpServerUpgrade编译器和处理器
         HttpServerUpgradeHandler.UpgradeCodec upgradeCodec =
-                new Http2ServerUpgradeCodec(new HelloWorldHttp2Handler());
+                new Http2ServerUpgradeCodec(new Http2Handler());
         HttpServerUpgradeHandler upgradeHandler =
                 new HttpServerUpgradeHandler(sourceCodec, Collections.singletonList(upgradeCodec), 65536);
 
         ch.pipeline().addLast(sourceCodec);
         ch.pipeline().addLast(upgradeHandler);
-//        用户自己触发
+//        Invoked if the user triggered an event with some custom object
         ch.pipeline().addLast(new UserEventLogger());
     }
 
